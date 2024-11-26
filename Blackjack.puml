@@ -1,0 +1,86 @@
+@startuml
+left to right direction
+
+class Juego {
+    - jugadores : List<Jugador>
+    - crupier : Crupier
+    + jugar()
+    + repartirCartas()
+    + reiniciarJuego()
+    + determinarGanador()
+}
+
+class Baraja {
+    - cartas : List<Carta>
+    - instancia : Baraja
+    - Baraja()
+    + reiniciar()
+    + mezclar()
+    + robarCarta()
+    + obtenerInstancia()
+}
+
+class Carta {
+    - palo : Palo
+    - rango : Rango
+    + obtenerRango()
+    + obtenerPalo()
+    + obtenerCarta()
+}
+
+abstract class Participante {
+    - cartas : List<Carta>
+    - puntuacion : int
+    - activo : boolean
+    + obtenerCarta()
+    + eliminarCartas()
+    + getCartas()
+    + calcularPuntuacion()
+    + obtenerPuntuacion()
+    + estaActivo()
+}
+
+class Crupier {
+    + getCartas()
+    + completarMano()
+}
+
+class Jugador {
+    - nombre
+    + plantarse()
+}
+
+enum Palo {
+    PICAS
+    CORAZONES
+    DIAMANTES
+    TREBOLES
+}
+
+enum Rango {
+    AS
+    DOS
+    TRES
+    CUATRO
+    CINCO
+    SEIS
+    SIETE
+    OCHO
+    NUEVE
+    DIEZ
+    JOTA
+    REINA
+    REY
+}
+
+Baraja --> Baraja
+Baraja "52" ---> Carta
+Carta --> Palo
+Carta --> Rango
+Participante "*" -> Carta
+Participante .> Baraja
+Crupier --|> Participante
+Jugador --|> Participante
+Juego -> Participante
+
+@enduml
