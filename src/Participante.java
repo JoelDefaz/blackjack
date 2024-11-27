@@ -7,6 +7,7 @@ public abstract class Participante {
     private int puntuacion;
     protected boolean activo;
 
+    // Constructor para inicializar el participante con una baraja, puntuación y estado activo
     public Participante() {
         cartas = new ArrayList<>();
         baraja = Baraja.obtenerInstancia();
@@ -14,6 +15,7 @@ public abstract class Participante {
         activo = true;
     }
 
+    // Método para obtener una carta de la baraja y actualizar la puntuación
     public void obtenerCarta() {
         cartas.add(baraja.robarCarta());
         calcularPuntuacion();
@@ -22,16 +24,19 @@ public abstract class Participante {
         }
     }
 
+    // Método para eliminar todas las cartas del participante y reiniciar el estado
     public void eliminarCartas() {
         cartas.clear();
         puntuacion = 0;
         activo = true;
     }
 
+    // Método para obtener todas las cartas del participante
     public Carta[] getCartas() {
         return cartas.toArray(new Carta[0]);
     }
 
+    // Método privado para calcular la puntuación del participante según sus cartas
     private void calcularPuntuacion() {
         int numeroAses = 0;
         int puntuacion = 0;
@@ -51,10 +56,12 @@ public abstract class Participante {
         this.puntuacion = puntuacion;
     }
 
+    // Método para obtener la puntuación actual del participante
     public int obtenerPuntuacion() {
         return puntuacion;
     }
 
+    // Método para verificar si el participante está activo (es decir, no se ha plantado ni ha superado 21)
     public boolean estaActivo() {
         return activo;
     }
