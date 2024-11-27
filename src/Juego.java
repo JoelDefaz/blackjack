@@ -107,16 +107,16 @@ public class Juego extends JFrame {
             panelJugador.setPreferredSize(new Dimension(400, 200));
             panelJugadorConBotones.add(panelJugador, BorderLayout.CENTER);
 
-            JPanel botonesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER)); // Centrado de los botones
-            botonesPanel.setAlignmentX(Component.CENTER_ALIGNMENT); // Asegurar que los botones se centren
+            JPanel botonesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+            botonesPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
             // Botón de "Pedir carta"
             JButton pedirCartaButton = new JButton("Pedir carta");
-            pedirCartaButton.setFont(new Font("Segoe UI", Font.PLAIN, 10)); // Fuente más pequeña
-            pedirCartaButton.setPreferredSize(new Dimension(90, 25)); // Tamaño más pequeño
-            pedirCartaButton.setBackground(new Color(200, 200, 200));  // Color de fondo suave (gris claro)
-            pedirCartaButton.setForeground(Color.DARK_GRAY);  // Color de texto gris oscuro
-            pedirCartaButton.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Borde gris suave
+            pedirCartaButton.setFont(new Font("Segoe UI", Font.PLAIN, 10));
+            pedirCartaButton.setPreferredSize(new Dimension(90, 25));
+            pedirCartaButton.setBackground(new Color(200, 200, 200));
+            pedirCartaButton.setForeground(Color.DARK_GRAY);
+            pedirCartaButton.setBorder(BorderFactory.createLineBorder(Color.GRAY));
             pedirCartaButton.addActionListener(e -> {
                 jugador.obtenerCarta();
                 repaint();
@@ -135,11 +135,11 @@ public class Juego extends JFrame {
 
             // Botón de "Plantarse"
             JButton plantarseButton = new JButton("Plantarse");
-            plantarseButton.setFont(new Font("Segoe UI", Font.PLAIN, 10)); // Fuente más pequeña
-            plantarseButton.setPreferredSize(new Dimension(90, 25)); // Tamaño más pequeño
-            plantarseButton.setBackground(new Color(230, 230, 230));  // Color de fondo suave (gris claro)
-            plantarseButton.setForeground(Color.DARK_GRAY);  // Color de texto gris oscuro
-            plantarseButton.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Borde gris suave
+            plantarseButton.setFont(new Font("Segoe UI", Font.PLAIN, 10));
+            plantarseButton.setPreferredSize(new Dimension(90, 25));
+            plantarseButton.setBackground(new Color(230, 230, 230));
+            plantarseButton.setForeground(Color.DARK_GRAY);
+            plantarseButton.setBorder(BorderFactory.createLineBorder(Color.GRAY));
             plantarseButton.addActionListener(e -> {
                 jugador.plantarse();
                 JOptionPane.showMessageDialog(this, jugador + " se ha plantado.");
