@@ -9,7 +9,7 @@ public class Juego extends JFrame {
     private Map<Jugador, List<JButton>> botonesJugadores;  // Mapa para almacenar los botones de los jugadores
 
     public Juego() {
-        setTitle("Juego de Cartas");
+        setTitle("Blackjack");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
