@@ -6,7 +6,7 @@ import java.util.*;
 public class Juego extends JFrame {
     private List<Jugador> jugadores;
     private Crupier crupier;
-    private Map<Jugador, List<JButton>> botonesJugadores;  // Mapa para almacenar los botones de los jugadores
+    private Map<Jugador, List<JButton>> botonesJugadores;
 
     public Juego() {
         setTitle("Blackjack");
@@ -16,7 +16,7 @@ public class Juego extends JFrame {
 
         jugadores = new ArrayList<>();
         crupier = new Crupier();
-        botonesJugadores = new HashMap<>(); // Inicializar el mapa de botones
+        botonesJugadores = new HashMap<>();
 
         jugadores.add(new Jugador("Jugador 1"));
         jugadores.add(new Jugador("Jugador 2"));
@@ -91,24 +91,22 @@ public class Juego extends JFrame {
     private void configurarElementosCrupier() {
         JPanel panelCrupier = new CartaPanel(crupier, "Cartas del Crupier");
         panelCrupier.setPreferredSize(new Dimension(800, 150));
-        JPanel crupierPanel = new JPanel(new FlowLayout(FlowLayout.CENTER)); // Centrado horizontalmente
+        JPanel crupierPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         crupierPanel.add(panelCrupier);
         add(crupierPanel, BorderLayout.NORTH);
     }
 
     private void configurarElementosJugadores() {
         JPanel panelJugadores = new JPanel();
-        panelJugadores.setLayout(new BoxLayout(panelJugadores, BoxLayout.Y_AXIS)); // Disposición vertical
+        panelJugadores.setLayout(new BoxLayout(panelJugadores, BoxLayout.Y_AXIS));
 
         for (Jugador jugador : jugadores) {
             JPanel panelJugadorConBotones = new JPanel(new BorderLayout());
 
-            // Crear panel para las cartas del jugador
             CartaPanel panelJugador = new CartaPanel(jugador, jugador.toString());
             panelJugador.setPreferredSize(new Dimension(400, 200));
             panelJugadorConBotones.add(panelJugador, BorderLayout.CENTER);
 
-            // Crear panel para los botones estilizados (usar FlowLayout)
             JPanel botonesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER)); // Centrado de los botones
             botonesPanel.setAlignmentX(Component.CENTER_ALIGNMENT); // Asegurar que los botones se centren
 
@@ -120,14 +118,17 @@ public class Juego extends JFrame {
             pedirCartaButton.setForeground(Color.DARK_GRAY);  // Color de texto gris oscuro
             pedirCartaButton.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Borde gris suave
             pedirCartaButton.addActionListener(e -> {
-                // Llamada al método pedirCarta
                 jugador.obtenerCarta();
                 repaint();
-                if (!jugador.estaActivo()) {
+                if (jugador.estaActivo()) {
+                    return;
+                } else if (jugador.obtenerPuntuacion() == 21) {
+                    JOptionPane.showMessageDialog(this, "Blackjack");
+                } else {
                     JOptionPane.showMessageDialog(this, jugador + " ha perdido");
-                    synchronized (jugador) {
-                        jugador.notify();
-                    }
+                }
+                synchronized (jugador) {
+                    jugador.notify();
                 }
             });
             pedirCartaButton.setEnabled(false);
@@ -140,7 +141,6 @@ public class Juego extends JFrame {
             plantarseButton.setForeground(Color.DARK_GRAY);  // Color de texto gris oscuro
             plantarseButton.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Borde gris suave
             plantarseButton.addActionListener(e -> {
-                // Llamada al método plantarse
                 jugador.plantarse();
                 JOptionPane.showMessageDialog(this, jugador + " se ha plantado.");
                 synchronized (jugador) {
@@ -149,18 +149,15 @@ public class Juego extends JFrame {
             });
             plantarseButton.setEnabled(false);
 
-            // Añadir los botones al panel de botones
             botonesPanel.add(pedirCartaButton);
             botonesPanel.add(plantarseButton);
 
-            // Añadir los botones al mapa de botones del jugador
             botonesJugadores.put(jugador, Arrays.asList(pedirCartaButton, plantarseButton));
 
             panelJugadorConBotones.add(botonesPanel, BorderLayout.EAST);
             panelJugadores.add(panelJugadorConBotones);
         }
 
-        // Añadir panel de jugadores al centro
         JScrollPane scrollPanel = new JScrollPane(panelJugadores);
         add(scrollPanel, BorderLayout.CENTER);
         setVisible(true);
