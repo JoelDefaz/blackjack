@@ -20,8 +20,11 @@ class CartaPanel extends JPanel {
 
         Font titleFont = new Font("Segoe UI", Font.PLAIN, 20);
         g2d.setFont(titleFont);
-        g2d.drawString(titulo, 10, 30);
-
+        if (participante instanceof Jugador) {
+            g2d.drawString(titulo + " - " + participante.obtenerPuntuacion() + " puntos", 10, 30);
+        } else {
+            g2d.drawString(titulo, 10, 30);
+        }
         Font cardFont = new Font("Segoe UI Symbol", Font.PLAIN, 80);
         g2d.setFont(cardFont);
 
