@@ -84,14 +84,11 @@ public class Juego extends JFrame {
         } else if (empate) {
             JOptionPane.showMessageDialog(this, "Empate entre los participantes con " + puntajeMaximo + " puntos.");
         } else {
-            JOptionPane.showMessageDialog(this, ganador + " es el ganador con " + puntajeMaximo + " puntos.");
+            JOptionPane.showMessageDialog(this, ganador + " es el ganador\n" +
+                    crupier + ":  " + crupier.obtenerPuntuacion() + " puntos\n" +
+                            jugadores.get(0) + ": " + jugadores.get(0).obtenerPuntuacion() + " puntos\n" +
+                            jugadores.get(1) + ": " + jugadores.get(1).obtenerPuntuacion() + " puntos");
         }
-        mostrarPuntuaciones();
-    }
-
-    private void mostrarPuntuaciones() {
-        JOptionPane.showMessageDialog(this, "Puntuaciones:\n" + crupier + " - " + crupier.obtenerPuntuacion() + "\n" + jugadores.get(0) + " - " +
-                jugadores.get(0).obtenerPuntuacion() + "\n" + jugadores.get(1) + " - " + jugadores.get(1).obtenerPuntuacion());
     }
 
     private void configurarElementosCrupier() {
