@@ -86,6 +86,12 @@ public class Juego extends JFrame {
         } else {
             JOptionPane.showMessageDialog(this, ganador + " es el ganador con " + puntajeMaximo + " puntos.");
         }
+        mostrarPuntuaciones();
+    }
+
+    private void mostrarPuntuaciones() {
+        JOptionPane.showMessageDialog(this, "Puntuaciones:\n" + crupier + " - " + crupier.obtenerPuntuacion() + "\n" + jugadores.get(0) + " - " +
+                jugadores.get(0).obtenerPuntuacion() + "\n" + jugadores.get(1) + " - " + jugadores.get(1).obtenerPuntuacion());
     }
 
     private void configurarElementosCrupier() {
